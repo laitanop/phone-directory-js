@@ -9,6 +9,18 @@
       href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Geologica:wght,CRSV@100..900,0&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="utf-8" />
     <title>My home page</title>
   </head>
@@ -18,6 +30,44 @@
         <img src="images/XYZ-vendor-logo.svg" alt="XYZ Vendor Logo" />
         <h1 class="header-title">Phone Directory</h1>
         <p class="header-subtitle">Manage your vendor contacts in one place</p>
+      </div>
+      <div id="content" class="content">
+        <p class="content-title">ADD NEW VENDOR</p>
+        <form id="vendor-form" class="vendor-form">
+          <div class="form-group">
+            <label class="form-label" for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              data-testid="name"
+              class="form-input"
+              placeholder="e.g. John Smith"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="mobile">Mobile No.</label>
+            <input
+              type="text"
+              id="mobile"
+              data-testid="mobile"
+              class="form-input"
+              placeholder="e.g. 9876543210"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              data-testid="email"
+              class="form-input"
+              placeholder="e.g. john@company.com"
+            />
+          </div>
+          <button type="submit" data-testid="submit" class="btn-add-vendor">
+            + Add Vendor
+          </button>
+        </form>
       </div>
     </div>
 
