@@ -64,10 +64,47 @@
               placeholder="e.g. john@company.com"
             />
           </div>
-          <button type="submit" data-testid="submit" class="btn-add-vendor">
+          <button
+            type="button"
+            data-testid="submit"
+            class="btn-add-vendor"
+            onclick="addVendor()"
+          >
             + Add Vendor
           </button>
         </form>
+        <div id="error-message" class="error-message">Invalid Input</div>
+      </div>
+      <h2 class="contacts-title">Contacts Summary</h2>
+      <div id="content-table" class="content-table">
+        <table>
+          <thead>
+            <tr>
+              <th>NAME</th>
+              <th>MOBILE</th>
+              <th>EMAIL</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>1234567890</td>
+              <td>john@example.com</td>
+              <td>
+                <button class="btn-delete">✕</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Adele</td>
+              <td>9999999999</td>
+              <td>adele@xyzcompany.com</td>
+              <td>
+                <button class="btn-delete">✕</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
