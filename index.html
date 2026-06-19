@@ -21,6 +21,10 @@
       href="https://fonts.googleapis.com/css2?family=Anton&family=Geologica:wght,CRSV@100..900,0&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
     <meta charset="utf-8" />
     <title>My home page</title>
   </head>
@@ -73,9 +77,19 @@
             + Add Vendor
           </button>
         </form>
-        <div id="error-message" class="error-message">Invalid Input</div>
+        <div id="error-message" data-testid="error" class="error-message">
+          Invalid Input
+        </div>
       </div>
       <h2 class="contacts-title">Contacts Summary</h2>
+      <div class="search-wrapper">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Enter mobile number..."
+        />
+      </div>
       <div id="content-table" class="content-table">
         <table>
           <thead>
