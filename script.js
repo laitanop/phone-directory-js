@@ -49,11 +49,14 @@ let validateEmail = () => {
   }
 };
 
+let resetInputs = () => {
+  name.value = "";
+  mobile.value = "";
+  email.value = "";
+};
 function addVendor() {
   validateName();
   validateMobile();
   validateEmail();
-  console.log(name.value);
-  console.log(mobile.value);
-  console.log(email.value);
+  resetInputs();
 }
