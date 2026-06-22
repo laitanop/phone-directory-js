@@ -2,9 +2,13 @@ let name = document.getElementById("name");
 let mobile = document.getElementById("mobile");
 let email = document.getElementById("email");
 let errorMessage = document.getElementById("error-message");
+let table = document.getElementsByTagName("table");
+let tableBody = document.getElementById("contacts-body");
 
 let validateName = () => {
+  let isValid = false;
   const regEx1 = /[^a-zA-Z\s]+/;
+
   if (name.value.trim() === "") {
     errorMessage.textContent = "Name is required";
     errorMessage.style.display = "block";
@@ -16,10 +20,13 @@ let validateName = () => {
     errorMessage.style.display = "block";
   } else {
     errorMessage.style.display = "none";
+    isValid = true;
   }
+  return isValid;
 };
 
 let validateMobile = () => {
+  let isValid = false;
   let onlyNumbers = /^\d+$/;
   if (mobile.value.trim() === "") {
     errorMessage.textContent = "Mobile is required";
@@ -32,10 +39,13 @@ let validateMobile = () => {
     errorMessage.style.display = "block";
   } else {
     errorMessage.style.display = "none";
+    isValid = true;
   }
+  return isValid;
 };
 
 let validateEmail = () => {
+  let isValid = false;
   let emailRegex = /^[a-zA-Z][a-zA-Z0-9.]{1,9}@[a-zA-Z]{2,20}\.[a-zA-Z]{2,10}$/;
 
   if (email.value === "") {
@@ -46,7 +56,9 @@ let validateEmail = () => {
     errorMessage.style.display = "block";
   } else {
     errorMessage.style.display = "none";
+    isValid = true;
   }
+  return isValid;
 };
 
 let resetInputs = () => {
@@ -54,9 +66,17 @@ let resetInputs = () => {
   mobile.value = "";
   email.value = "";
 };
+
 function addVendor() {
-  validateName();
-  validateMobile();
-  validateEmail();
-  resetInputs();
+  if (validateName() && validateMobile() && validateEmail()) {
+    let newRow = document.createElement("tr");
+    newRow.innerHTML = `
+  <td>${name.value}</td>
+  <td>${mobile.value}</td>
+  <td>${email.value}</td>
+  <td><button class="btn-delete">✕</button></td>
+`;
+    tableBody.prepend(newRow);
+    resetInputs();
+  }
 }
