@@ -5,6 +5,7 @@ let errorMessage = document.getElementById("error-message");
 let table = document.getElementsByTagName("table");
 let tableBody = document.getElementById("contacts-body");
 let searchInput = document.getElementById("search-input");
+let contactCount = document.getElementById("contact-count");
 
 function renderContacts() {
   contacts.forEach((contact) => {

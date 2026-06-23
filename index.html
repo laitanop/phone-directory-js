@@ -1,24 +1,12 @@
 <!doctype html>
 <html>
   <head>
-    <title>XLZ Vendor Phone Directory</title>
+    <title>XYZ Vendor Phone Directory</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
       href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Geologica:wght,CRSV@100..900,0&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
       rel="stylesheet"
     />
     <link
@@ -26,92 +14,142 @@
       rel="stylesheet"
     />
     <meta charset="utf-8" />
-    <title>My home page</title>
   </head>
   <body>
-    <div id="main" class="main">
-      <div id="header" class="header">
-        <img src="images/XYZ-vendor-logo.svg" alt="XYZ Vendor Logo" />
-        <h1 class="header-title">Phone Directory</h1>
-        <p class="header-subtitle">Manage your vendor contacts in one place</p>
+    <nav class="navbar">
+      <div class="nav-left">
+        <img src="images/XYZ-vendor-logo.svg" alt="XYZ Logo" class="nav-logo" />
+        <span class="nav-brand">XYZ Vendor</span>
       </div>
-      <div id="content" class="content">
-        <p class="content-title">ADD NEW VENDOR</p>
-        <form id="vendor-form" class="vendor-form">
-          <div class="form-group">
-            <label class="form-label" for="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              data-testid="name"
-              class="form-input"
-              placeholder="e.g. John Smith"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="mobile">Mobile No.</label>
-            <input
-              type="text"
-              id="mobile"
-              data-testid="mobile"
-              class="form-input"
-              placeholder="e.g. 9876543210"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="email">Email</label>
-            <input
-              type="text"
-              id="email"
-              data-testid="email"
-              class="form-input"
-              placeholder="e.g. john@company.com"
-            />
-          </div>
-          <button
-            type="button"
-            data-testid="submit"
-            class="btn-add-vendor"
-            onclick="addVendor()"
-          >
-            + Add Vendor
-          </button>
-        </form>
-        <div id="error-message" data-testid="error" class="error-message">
-          Invalid Input
+    </nav>
+
+    <div class="page">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Phone Directory</h1>
+          <p class="page-subtitle">Manage your vendor contacts in one place</p>
+        </div>
+        <div class="page-badge">
+          <span>Total</span>
+          <strong id="contact-count">2</strong>
         </div>
       </div>
-      <h2 class="contacts-title">Contacts Summary</h2>
-      <div class="search-wrapper">
-        <span class="material-symbols-outlined search-icon">search</span>
-        <input
-          type="text"
-          id="search-input"
-          class="search-input"
-          placeholder="Enter mobile number..."
-        />
-        <button
-          class="btn-add-vendor"
-          type="button"
-          id="btn-search"
-          onclick="search()"
-        >
-          search
-        </button>
-      </div>
-      <div id="content-table" class="content-table">
-        <table>
-          <thead>
-            <tr>
-              <th>NAME</th>
-              <th>MOBILE</th>
-              <th>EMAIL</th>
-            </tr>
-          </thead>
-          <tbody id="contacts-body"></tbody>
-        </table>
+
+      <div class="page-layout">
+        <div class="page-main">
+          <div class="card">
+            <p class="card-label">ADD NEW VENDOR</p>
+            <form id="vendor-form" class="vendor-form">
+              <div class="form-group">
+                <label class="form-label" for="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  data-testid="name"
+                  class="form-input"
+                  placeholder="e.g. John Smith"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="mobile">Mobile No.</label>
+                <input
+                  type="text"
+                  id="mobile"
+                  data-testid="mobile"
+                  class="form-input"
+                  placeholder="e.g. 9876543210"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input
+                  type="text"
+                  id="email"
+                  data-testid="email"
+                  class="form-input"
+                  placeholder="e.g. john@company.com"
+                />
+              </div>
+              <button
+                type="button"
+                data-testid="submit"
+                class="btn-primary"
+                onclick="addVendor()"
+              >
+                + Add Vendor
+              </button>
+            </form>
+            <div id="error-message" data-testid="error" class="error-message">
+              Invalid Input
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="table-toolbar">
+              <h2 class="card-title">Contacts</h2>
+              <div class="search-wrapper">
+                <span class="material-symbols-outlined search-icon"
+                  >search</span
+                >
+                <input
+                  type="text"
+                  id="search-input"
+                  class="search-input"
+                  placeholder="Search by mobile..."
+                />
+                <button
+                  class="btn-outline"
+                  type="button"
+                  id="btn-search"
+                  onclick="search()"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>NAME</th>
+                    <th>MOBILE</th>
+                    <th>EMAIL</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="contacts-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-side">
+          <div class="dark-card">
+            <div class="dark-card-icon">
+              <img
+                src="images/XYZ-vendor-logo.svg"
+                alt="icon"
+                class="dark-card-logo"
+              />
+            </div>
+            <h3 class="dark-card-title">Stay Organized</h3>
+            <p class="dark-card-text">
+              Add vendors, search by mobile, and keep your contacts up to date.
+              Your directory, always in order.
+            </p>
+            <div class="dark-card-stat">
+              <span class="stat-label">Contacts saved</span>
+              <span class="stat-value" id="side-count">2</span>
+            </div>
+            <div class="dark-card-stat">
+              <span class="stat-label">Last updated</span>
+              <span class="stat-value">Today</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
     <script src="db.js"></script>
     <script src="script.js"></script>
   </body>

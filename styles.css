@@ -1,64 +1,166 @@
+/* ── Reset & base ───────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: "Geologica", sans-serif;
-  margin: 0;
-  min-height: 30vh;
-  background-color: #f0f2f5;
+  background-color: #f4f7f0;
+  min-height: 100vh;
+  color: #1a1a1a;
+}
+
+/* ── Navbar ─────────────────────────────────────── */
+.navbar {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
+  background-color: #1e2a1e;
+  padding: 0 2rem;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.header {
+.nav-left {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-family: "Geologica", sans-serif;
-  font-optical-sizing: auto;
+  gap: 0.6rem;
 }
-.header-title {
-  margin-top: -5px;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #000;
-}
-.header-subtitle {
-  margin-top: -15px;
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: #9e9e9e;
-  font-family: "Geologica", sans-serif;
-  font-optical-sizing: auto;
 
-  font-style: normal;
-  font-variation-settings:
-    "slnt" 0,
-    "CRSV" 0,
-    "SHRP" 0;
+.nav-logo {
+  height: 28px;
+  width: 28px;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
 }
-.content {
-  background-color: #fff;
-  height: 100%;
-  width: 100%;
-  border-radius: 10px;
-  /* padding: 1rem; */
-  box-shadow: 0 0 10px 0 rgba(217, 217, 217, 0.9);
 
-  margin-top: 2rem;
+.nav-brand {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.btn-nav {
+  background-color: #84b179;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Geologica", sans-serif;
+  transition: background-color 0.15s;
+}
+
+.btn-nav:hover {
+  background-color: #a2cb8b;
+}
+
+/* ── Page layout ────────────────────────────────── */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   margin-bottom: 2rem;
 }
-.content-title {
-  padding: 1rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: #9e9e9e;
-  font-family: "Geologica", sans-serif;
-  margin-bottom: 1rem;
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
 }
 
+.page-subtitle {
+  font-size: 0.9rem;
+  color: #7a8a7a;
+  margin-top: 0.3rem;
+}
+
+.page-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #fff;
+  border: 1px solid #c7eabb;
+  border-radius: 20px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.82rem;
+  color: #555;
+  white-space: nowrap;
+  margin-top: 0.25rem;
+}
+
+.page-badge strong {
+  color: #84b179;
+  font-weight: 700;
+}
+
+.page-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ── Cards ──────────────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e8f0e3;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.card-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #9e9e9e;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* ── Form ───────────────────────────────────────── */
 .vendor-form {
-  padding: 1rem;
   display: flex;
   align-items: flex-end;
   gap: 1rem;
@@ -72,105 +174,131 @@ body {
 }
 
 .form-label {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  color: #333;
-  font-family: "Geologica", sans-serif;
+  color: #555;
 }
 
 .form-input {
-  border: 1.5px solid #eeeeee;
-  border-radius: 5px;
-  padding: 0.6rem 0.85rem;
-  font-size: 0.9rem;
-  color: #333;
+  border: 1.5px solid #dde8d8;
+  border-radius: 7px;
+  padding: 0.58rem 0.85rem;
+  font-size: 0.875rem;
+  color: #1a1a1a;
   font-family: "Geologica", sans-serif;
   outline: none;
   width: 100%;
-  box-sizing: border-box;
-  background-color: #f0f2f5;
+  background-color: #fafcf8;
+  transition: border-color 0.15s;
 }
 
 .form-input::placeholder {
-  color: rgba(158, 158, 158, 0.6);
+  color: #bdbdbd;
 }
 
 .form-input:focus {
-  border-color: #f5a623;
+  border-color: #84b179;
+  background-color: #fff;
 }
+
+.error-message {
+  font-size: 0.8rem;
+  color: #e53935;
+  margin-top: 0.75rem;
+  display: none;
+}
+
+/* ── Buttons ────────────────────────────────────── */
+.btn-primary {
+  background: linear-gradient(135deg, #a2cb8b, #84b179);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.58rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Geologica", sans-serif;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(132, 177, 121, 0.35);
+  transition:
+    box-shadow 0.15s,
+    filter 0.15s;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 4px 12px rgba(132, 177, 121, 0.45);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #84b179;
+  border: 1.5px solid #a2cb8b;
+  border-radius: 7px;
+  padding: 0.42rem 0.9rem;
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Geologica", sans-serif;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+
+.btn-outline:hover {
+  background-color: #84b179;
+  color: #fff;
+}
+
+/* ── Table toolbar ──────────────────────────────── */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  gap: 1rem;
+}
+
 .search-wrapper {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1.5px solid #eeeeee;
+  border: 1.5px solid #dde8d8;
   border-radius: 8px;
-  padding: 0.6rem 0.85rem;
-  background-color: #ffffff;
-  width: fit-content;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  padding: 0.38rem 0.5rem 0.38rem 0.75rem;
+  background-color: #fafcf8;
+  transition: border-color 0.15s;
+}
+
+.search-wrapper:focus-within {
+  border-color: #84b179;
 }
 
 .search-icon {
-  font-size: 1.1rem;
-  color: #9e9e9e;
+  font-size: 1rem;
+  color: #a2cb8b;
 }
 
 .search-input {
   border: none;
   outline: none;
   background: transparent;
-  font-size: 0.9rem;
-  color: #333;
+  font-size: 0.85rem;
+  color: #1a1a1a;
   font-family: "Geologica", sans-serif;
-  width: 280px;
+  width: 200px;
 }
 
 .search-input::placeholder {
   color: #bdbdbd;
 }
-.btn-add-vendor {
-  background: linear-gradient(135deg, #b9f6ca, #00c853);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 0.65rem 1.25rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: "Geologica", sans-serif;
-  white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0, 200, 83, 0.4);
-}
 
-.btn-add-vendor:hover {
-  background: linear-gradient(135deg, #a5f0ba, #00b548);
-  box-shadow: 0 6px 16px rgba(0, 200, 83, 0.5);
-}
-
-.error-message {
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  color: #f44336;
-  font-family: "Geologica", sans-serif;
-  display: none;
-}
-
-.contacts-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  font-family: "Geologica", sans-serif;
-  margin-bottom: 1rem;
-}
-
-.content-table {
-  background-color: #fff;
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+/* ── Table ──────────────────────────────────────── */
+.table-container {
   overflow: hidden;
-  margin-bottom: 2rem;
+  border-radius: 8px;
 }
 
 table {
@@ -180,22 +308,22 @@ table {
 }
 
 thead th {
-  background-color: #f7f8fa;
+  background-color: #f0f8eb;
   text-align: left;
-  padding: 0.85rem 1.25rem;
-  font-size: 0.72rem;
+  padding: 0.7rem 1rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.07em;
-  color: #9e9e9e;
+  letter-spacing: 0.08em;
+  color: #84b179;
   text-transform: uppercase;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #c7eabb;
 }
 
 tbody td {
-  padding: 1rem 1.25rem;
-  font-size: 0.9rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.875rem;
   color: #333;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f2f7ee;
 }
 
 tbody tr:last-child td {
@@ -203,25 +331,96 @@ tbody tr:last-child td {
 }
 
 tbody tr:hover {
-  background-color: #fafafa;
+  background-color: #f7fbf4;
 }
 
 .btn-delete {
   background: none;
   border: 1.5px solid #e0e0e0;
-  border-radius: 6px;
-  color: #9e9e9e;
-  font-size: 0.8rem;
-  width: 28px;
-  height: 28px;
+  border-radius: 5px;
+  color: #bdbdbd;
+  font-size: 0.75rem;
+  width: 26px;
+  height: 26px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition:
+    border-color 0.15s,
+    color 0.15s,
+    background-color 0.15s;
 }
 
 .btn-delete:hover {
-  border-color: #f44336;
-  color: #f44336;
+  border-color: #e53935;
+  color: #e53935;
   background-color: #fff5f5;
+}
+
+/* ── Dark side card ─────────────────────────────── */
+.page-side {
+  position: sticky;
+  top: 72px;
+}
+
+.dark-card {
+  background: linear-gradient(160deg, #1e3320 0%, #0f1a10 100%);
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.dark-card-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #a2cb8b, #84b179);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(132, 177, 121, 0.4);
+}
+
+.dark-card-logo {
+  height: 28px;
+  width: 28px;
+  filter: brightness(0) invert(1);
+}
+
+.dark-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.dark-card-text {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.6;
+}
+
+.dark-card-stat {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.stat-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #a2cb8b;
 }
