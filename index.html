@@ -86,9 +86,18 @@
         <span class="material-symbols-outlined search-icon">search</span>
         <input
           type="text"
+          id="search-input"
           class="search-input"
           placeholder="Enter mobile number..."
         />
+        <button
+          class="btn-add-vendor"
+          type="button"
+          id="btn-search"
+          onclick="search()"
+        >
+          search
+        </button>
       </div>
       <div id="content-table" class="content-table">
         <table>
@@ -99,28 +108,11 @@
               <th>EMAIL</th>
             </tr>
           </thead>
-          <tbody id="contacts-body">
-            <tr>
-              <td>John Doe</td>
-              <td>1234567890</td>
-              <td>john@example.com</td>
-              <td>
-                <button class="btn-delete">✕</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Adele</td>
-              <td>9999999999</td>
-              <td>adele@xyzcompany.com</td>
-              <td>
-                <button class="btn-delete">✕</button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody id="contacts-body"></tbody>
         </table>
       </div>
     </div>
-
+    <script src="db.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

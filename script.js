@@ -4,7 +4,43 @@ let email = document.getElementById("email");
 let errorMessage = document.getElementById("error-message");
 let table = document.getElementsByTagName("table");
 let tableBody = document.getElementById("contacts-body");
+let searchInput = document.getElementById("search-input");
 
+function renderContacts() {
+  contacts.forEach((contact) => {
+    let newRow = document.createElement("tr");
+    newRow.innerHTML = `<tr>
+              <td>${contact.name}</td>
+             <td>${contact.mobile}</td>
+             <td>${contact.email}</td>
+            </tr>`;
+    tableBody.appendChild(newRow);
+  });
+}
+
+function search() {
+  tableBody.innerHTML = "";
+
+  if (searchInput.value === "") {
+    renderContacts();
+    return;
+  }
+
+  let filtered = contacts.filter(
+    (contact) => contact.mobile === searchInput.value,
+  );
+
+  filtered.forEach((contact) => {
+    let newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>${contact.name}</td>
+      <td>${contact.mobile}</td>
+      <td>${contact.email}</td>
+    `;
+    tableBody.appendChild(newRow);
+  });
+}
+renderContacts();
 let validateName = () => {
   let isValid = false;
   const regEx1 = /[^a-zA-Z\s]+/;
@@ -74,7 +110,6 @@ function addVendor() {
   <td>${name.value}</td>
   <td>${mobile.value}</td>
   <td>${email.value}</td>
-  <td><button class="btn-delete">✕</button></td>
 `;
     tableBody.prepend(newRow);
     resetInputs();
