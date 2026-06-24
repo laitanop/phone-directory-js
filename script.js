@@ -5,9 +5,10 @@ let errorMessage = document.getElementById("error-message");
 let table = document.getElementsByTagName("table");
 let tableBody = document.getElementById("contacts-body");
 let searchInput = document.getElementById("search-input");
-let contactCount = document.getElementById("contact-count");
+let contactCount = document.querySelectorAll(".contact-count-display");
 
 function renderContacts() {
+  contactCount.forEach((el) => (el.textContent = contacts.length));
   contacts.forEach((contact) => {
     let newRow = document.createElement("tr");
     newRow.innerHTML = `<tr>
@@ -15,7 +16,7 @@ function renderContacts() {
              <td>${contact.mobile}</td>
              <td>${contact.email}</td>
             </tr>`;
-    tableBody.appendChild(newRow);
+    tableBody.prepend(newRow);
   });
 }
 
@@ -38,7 +39,7 @@ function search() {
       <td>${contact.mobile}</td>
       <td>${contact.email}</td>
     `;
-    tableBody.appendChild(newRow);
+    tableBody.prepend(newRow);
   });
 }
 renderContacts();
@@ -106,6 +107,12 @@ let resetInputs = () => {
 
 function addVendor() {
   if (validateName() && validateMobile() && validateEmail()) {
+    contacts.push({
+      name: name.value,
+      mobile: mobile.value,
+      email: email.value,
+    });
+    contactCount.forEach((el) => (el.textContent = contacts.length));
     let newRow = document.createElement("tr");
     newRow.innerHTML = `
   <td>${name.value}</td>
