@@ -134,6 +134,11 @@ body {
   align-items: start;
 }
 
+/* Prevent the table's min-width from blowing out the grid column. */
+.page-main {
+  min-width: 0;
+}
+
 /* ── Cards ──────────────────────────────────────── */
 .card {
   background: #fff;
@@ -337,11 +342,10 @@ tbody tr:hover {
 .btn-delete {
   background: none;
   border: 1.5px solid #e0e0e0;
-  border-radius: 5px;
+  border-radius: 7px;
   color: #bdbdbd;
-  font-size: 0.75rem;
-  width: 26px;
-  height: 26px;
+  width: 34px;
+  height: 34px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -352,10 +356,100 @@ tbody tr:hover {
     background-color 0.15s;
 }
 
+.btn-delete .material-symbols-outlined {
+  font-size: 1.05rem;
+}
+
 .btn-delete:hover {
   border-color: #e53935;
   color: #e53935;
   background-color: #fff5f5;
+}
+
+.btn-delete:focus-visible {
+  outline: 2px solid #e53935;
+  outline-offset: 2px;
+}
+
+/* ── Contact cell (avatar + name) ───────────────── */
+.contact-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.contact-name {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.mono {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.email-cell {
+  color: #6b7a6b;
+}
+
+.actions-cell {
+  text-align: right;
+  width: 1%;
+  white-space: nowrap;
+}
+
+/* ── Empty state ────────────────────────────────── */
+.empty-row td {
+  padding: 0;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2.75rem 1rem;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 2.25rem;
+  color: #c7ddbb;
+}
+
+.empty-text {
+  font-size: 0.875rem;
+  color: #9aa89a;
+}
+
+/* ── Row entrance ───────────────────────────────── */
+.contact-row {
+  animation: rowIn 0.22s ease-out;
+}
+
+@keyframes rowIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── Dark side card ─────────────────────────────── */
@@ -486,4 +580,103 @@ tbody tr:hover {
 .footer-icon {
   width: 22px;
   height: 22px;
+}
+
+/* ── Focus visibility (accessibility) ───────────── */
+.btn-primary:focus-visible,
+.btn-outline:focus-visible,
+.nav-link:focus-visible,
+.footer-links a:focus-visible {
+  outline: 2px solid #84b179;
+  outline-offset: 2px;
+  border-radius: 7px;
+}
+
+.form-input:focus-visible {
+  border-color: #84b179;
+  box-shadow: 0 0 0 3px rgba(132, 177, 121, 0.18);
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 880px) {
+  .page-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .page-side {
+    position: static;
+  }
+
+  .vendor-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 0.7rem 1.2rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .navbar {
+    padding: 0 1.25rem;
+  }
+
+  .page {
+    padding: 1.75rem 1.25rem 3rem;
+  }
+
+  .page-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+  }
+
+  .table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-wrapper {
+    width: 100%;
+  }
+
+  .search-input {
+    flex: 1;
+    width: auto;
+  }
+
+  /* Let the table scroll horizontally instead of squashing. */
+  .table-container {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 460px;
+  }
+
+  .footer-inner {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .footer-links {
+    margin-left: 0;
+  }
+}
+
+/* ── Reduced motion ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

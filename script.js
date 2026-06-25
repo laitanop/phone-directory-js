@@ -7,42 +7,132 @@ let tableBody = document.getElementById("contacts-body");
 let searchInput = document.getElementById("search-input");
 let contactCount = document.querySelectorAll(".contact-count-display");
 
-function renderContacts() {
-  contactCount.forEach((el) => (el.textContent = contacts.length));
-  contacts.forEach((contact) => {
-    let newRow = document.createElement("tr");
-    newRow.innerHTML = `<tr>
-              <td>${contact.name}</td>
-             <td>${contact.mobile}</td>
-             <td>${contact.email}</td>
-            </tr>`;
-    tableBody.prepend(newRow);
-  });
+/* ── Helpers ─────────────────────────────────────── */
+function escapeHtml(str) {
+  return String(str).replace(
+    /[&<>"']/g,
+    (c) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      })[c],
+  );
 }
 
-function search() {
+function getInitials(fullName) {
+  const parts = fullName.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
+// Deterministic on-theme accent for each avatar based on the name.
+const AVATAR_COLORS = [
+  "#84b179",
+  "#6fa3c9",
+  "#c99a6f",
+  "#9a7fc9",
+  "#c97f9a",
+  "#5fb0a0",
+];
+function avatarColor(fullName) {
+  let hash = 0;
+  for (let i = 0; i < fullName.length; i++) {
+    hash = fullName.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length];
+}
+
+function updateCount() {
+  contactCount.forEach((el) => (el.textContent = contacts.length));
+}
+
+function createRow(contact) {
+  const newRow = document.createElement("tr");
+  newRow.className = "contact-row";
+  newRow.innerHTML = `
+    <td>
+      <div class="contact-cell">
+        <span class="avatar" style="background:${avatarColor(contact.name)}">${escapeHtml(getInitials(contact.name))}</span>
+        <span class="contact-name">${escapeHtml(contact.name)}</span>
+      </div>
+    </td>
+    <td class="mono">${escapeHtml(contact.mobile)}</td>
+    <td class="email-cell">${escapeHtml(contact.email)}</td>
+    <td class="actions-cell">
+      <button class="btn-delete" type="button" aria-label="Delete ${escapeHtml(contact.name)}" title="Delete contact">
+        <span class="material-symbols-outlined">delete</span>
+      </button>
+    </td>`;
+  newRow
+    .querySelector(".btn-delete")
+    .addEventListener("click", () => deleteContact(contact));
+  return newRow;
+}
+
+function showEmptyState(message) {
+  tableBody.innerHTML = `
+    <tr class="empty-row">
+      <td colspan="4">
+        <div class="empty-state">
+          <span class="material-symbols-outlined empty-icon">contacts</span>
+          <p class="empty-text">${escapeHtml(message)}</p>
+        </div>
+      </td>
+    </tr>`;
+}
+
+/* ── Rendering ───────────────────────────────────── */
+function getFilteredContacts() {
+  const query = searchInput.value.trim().toLowerCase();
+  if (query === "") return contacts;
+  return contacts.filter(
+    (contact) =>
+      contact.name.toLowerCase().includes(query) ||
+      contact.mobile.toLowerCase().includes(query) ||
+      contact.email.toLowerCase().includes(query),
+  );
+}
+
+function renderContacts() {
+  updateCount();
   tableBody.innerHTML = "";
 
-  if (searchInput.value === "") {
-    renderContacts();
+  const list = getFilteredContacts();
+
+  if (list.length === 0) {
+    showEmptyState(
+      contacts.length === 0
+        ? "No contacts yet. Add your first vendor above."
+        : "No contacts match your search.",
+    );
     return;
   }
 
-  let filtered = contacts.filter(
-    (contact) => contact.mobile === searchInput.value,
-  );
-
-  filtered.forEach((contact) => {
-    let newRow = document.createElement("tr");
-    newRow.innerHTML = `
-      <td>${contact.name}</td>
-      <td>${contact.mobile}</td>
-      <td>${contact.email}</td>
-    `;
-    tableBody.prepend(newRow);
-  });
+  // Newest contacts appear first.
+  list.forEach((contact) => tableBody.prepend(createRow(contact)));
 }
+
+function deleteContact(contact) {
+  const index = contacts.indexOf(contact);
+  if (index > -1) {
+    contacts.splice(index, 1);
+    renderContacts();
+  }
+}
+
+function search() {
+  renderContacts();
+}
+
+searchInput.addEventListener("input", renderContacts);
+
 renderContacts();
+
+/* ── Validation ──────────────────────────────────── */
 let validateName = () => {
   let isValid = false;
   const regEx1 = /[^a-zA-Z\s]+/;
@@ -112,14 +202,10 @@ function addVendor() {
       mobile: mobile.value,
       email: email.value,
     });
-    contactCount.forEach((el) => (el.textContent = contacts.length));
-    let newRow = document.createElement("tr");
-    newRow.innerHTML = `
-  <td>${name.value}</td>
-  <td>${mobile.value}</td>
-  <td>${email.value}</td>
-`;
-    tableBody.prepend(newRow);
+    // Clear any active search so the newly added contact is visible.
+    searchInput.value = "";
+    renderContacts();
     resetInputs();
+    name.focus();
   }
 }
